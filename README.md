@@ -9,6 +9,6 @@ This project aims to create the Ibani dictionary in the SQL and JSON, to enable 
 
 ## Language Resources
 Some language learning resources for Ibani Egere are listed below:
-[Lets Speak Ibani](https://www.facebook.com/pages/category/Community/Lets-Speak-Ibani-1982795345291272/)
-
-[Ibani dictionary](http://www.rogerblench.info/Language/Niger-Congo/Ijoid/Ibani/Ibani-English%20dictionary.pdf)
+>[Lets Speak Ibani](https://www.facebook.com/pages/category/Community/Lets-Speak-Ibani-1982795345291272/)
+>
+>[Ibani dictionary](http://www.rogerblench.info/Language/Niger-Congo/Ijoid/Ibani/Ibani-English%20dictionary.pdf)
