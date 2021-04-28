@@ -7,6 +7,15 @@ Ibani egere(Ibani Language) is an Ijoid language spoken in Nigeria's Niger delta
 ## Goal
 This project aims to create the Ibani dictionary in the SQL and JSON, to enable a more standardized format for applications in the language
 
+
+## File Descriptions
+The files in this repository are listed below:
+* `Ibani dictionary conversion to sql.ipynb`: Python notebook for exploration, cleaning and transformation.
+* `Ibani dictionary `: Pdf file showing initial version of Ibani dictionary.
+* `IbaniDictionary.db`: Ibani dictionary in sql.
+* `IbaniDictionary.json`:json version of Ibani dictionary.
+* `Merged File`: Excel file version of Ibani dictionary used as input.
+
 ## Language Resources
 Some language learning resources for Ibani Egere are listed below:
 >[Lets Speak Ibani](https://www.facebook.com/pages/category/Community/Lets-Speak-Ibani-1982795345291272/)
