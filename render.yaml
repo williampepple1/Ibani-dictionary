@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: fastapi-app
+    name: ibani-dictionary
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn main:app --bind 0.0.0.0:8000
