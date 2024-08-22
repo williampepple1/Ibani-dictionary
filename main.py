@@ -12,21 +12,23 @@ def get_db():
         db.close()
 
 @app.get("/search")
-def search_word(ibani: str, db: Session = Depends(get_db)):
+def search_word(word: str, db: Session = Depends(get_db)):
     try:
-        if not ibani:
+        if not word:
             raise HTTPException(status_code=400, detail="A search word must be provided")
 
-        # Use the correct column name casing
-        dictionary_entry = db.query(Dictionary).filter(Dictionary.Ibani == ibani).first()
+        # Query the `Meaning` column for entries containing the search term
+        dictionary_entries = db.query(Dictionary).filter(Dictionary.Meaning.ilike(f"%{word}%")).all()
 
-        if not dictionary_entry:
-            raise HTTPException(status_code=404, detail="Word not found")
+        if not dictionary_entries:
+            raise HTTPException(status_code=404, detail="No words associated with this meaning are found in the dictionary")
 
-        return {
-            "Ibani": dictionary_entry.Ibani,
-            "Pos": dictionary_entry.Pos,
-            "Meaning": dictionary_entry.Meaning
-        }
+        return [
+            {
+                "Ibani": entry.Ibani,
+                "Pos": entry.Pos,
+                "Meaning": entry.Meaning
+            } for entry in dictionary_entries
+        ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
