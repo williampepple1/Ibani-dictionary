@@ -13,16 +13,20 @@ def get_db():
 
 @app.get("/search")
 def search_word(ibani: str, db: Session = Depends(get_db)):
-    if not ibani:
-        raise HTTPException(status_code=400, detail="A search word must be provided")
+    try:
+        if not ibani:
+            raise HTTPException(status_code=400, detail="A search word must be provided")
 
-    dictionary_entry = db.query(Dictionary).filter(Dictionary.ibani == ibani.lower()).first()
+        # Use the correct column name casing
+        dictionary_entry = db.query(Dictionary).filter(Dictionary.Ibani == ibani).first()
 
-    if not dictionary_entry:
-        raise HTTPException(status_code=404, detail="Word not found")
+        if not dictionary_entry:
+            raise HTTPException(status_code=404, detail="Word not found")
 
-    return {
-        "ibani": dictionary_entry.ibani,
-        "pos": dictionary_entry.pos,
-        "meaning": dictionary_entry.meaning
-    }
+        return {
+            "Ibani": dictionary_entry.Ibani,
+            "Pos": dictionary_entry.Pos,
+            "Meaning": dictionary_entry.Meaning
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

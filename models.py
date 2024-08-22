@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -10,9 +10,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 class Dictionary(Base):
-    __tablename__ = "dictionary"  # Ensure this matches the table name in your database
+    __tablename__ = "Ibani"  # Ensure this matches your table name
 
-    id = Column(Integer, primary_key=True, index=True)
-    ibani = Column(String)
-    pos = Column(String)
-    meaning = Column(String)
+    Ibani = Column(String, primary_key=True)  # Match the casing used in the database
+    Pos = Column(String)
+    Meaning = Column(String)
