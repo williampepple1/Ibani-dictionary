@@ -5,12 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Add CORS middleware to the app
+# Add CORS middleware to accept requests from any origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://williampepple1.github.io/ibani-frontend/"],  # Allows all origins
+    allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
-    allow_methods=["GET"],  # Allows all methods
+    allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
 
@@ -20,6 +20,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Ibani Dictionary API!"}
 
 @app.get("/search")
 def search_word(word: str, db: Session = Depends(get_db)):
