@@ -1,7 +1,19 @@
 services:
   - type: web
-    name: ibani-dictionary
+    name: Ibani-dictionary
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn main:app --bind 0.0.0.0:8000
-    plan: free
+    plan: free  
+    buildCommand: |
+      # Create a virtual environment if it doesn't exist
+      if [ ! -d "venv" ]; then
+        python -m venv venv
+      fi
+      # Activate the virtual environment
+      source venv/bin/activate
+      # Install dependencies
+      pip install -r requirements.txt
+    startCommand: |
+      # Activate the virtual environment
+      source venv/bin/activate
+      # Run Gunicorn
+      gunicorn main:app
