@@ -32,10 +32,10 @@ def search_word(word: str, db: Session = Depends(get_db)):
         if not word:
             raise HTTPException(status_code=400, detail="A search word must be provided")
 
-        # Create a search pattern to match the exact word
-        search_pattern = f"% {word.lower()} %"
-        dictionary_entries = db.query(Dictionary).filter(func.lower(Dictionary.Meaning).like(search_pattern)).all()
+          # Using regular expressions to match the exact word as a whole
+        search_pattern = f"\\b{word.lower()}\\b"  # \\b is a word boundary anchor
 
+        dictionary_entries = db.query(Dictionary).filter(func.lower(Dictionary.Meaning).op('REGEXP')(search_pattern)).all()
         if not dictionary_entries:
             raise HTTPException(status_code=404, detail="No words associated with this meaning are found in the dictionary")
 
