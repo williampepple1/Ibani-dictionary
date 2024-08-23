@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from models import Dictionary, SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -31,9 +32,10 @@ def search_word(word: str, db: Session = Depends(get_db)):
         if not word:
             raise HTTPException(status_code=400, detail="A search word must be provided")
 
-        # Query the `Meaning` column for entries containing the search term
-        dictionary_entries = db.query(Dictionary).filter(Dictionary.Meaning.ilike(f"%{word}%")).all()
+          # Using regular expressions to match the exact word as a whole
+        search_pattern = f"\\b{word.lower()}\\b"  # \\b is a word boundary anchor
 
+        dictionary_entries = db.query(Dictionary).filter(func.lower(Dictionary.Meaning).op('REGEXP')(search_pattern)).all()
         if not dictionary_entries:
             raise HTTPException(status_code=404, detail="No words associated with this meaning are found in the dictionary")
 
