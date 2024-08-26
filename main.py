@@ -41,7 +41,7 @@ def search_word(word: str, db: Session = Depends(get_db)):
 
         return [
             {
-                "Ibani": entry.Ibani,
+                "Ibani": entry.Ibani_word,
                 "Pos": entry.Pos,
                 "Meaning": entry.Meaning
             } for entry in dictionary_entries
